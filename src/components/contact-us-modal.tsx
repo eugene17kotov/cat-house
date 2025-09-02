@@ -1,0 +1,41 @@
+'use client';
+
+import { useState } from 'react';
+import ContactUsForm from './contact-us-form';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+
+interface ContactUsModalProps {
+  className?: string;
+  children?: React.ReactNode;
+}
+
+export default function ContactUsModal({
+  className,
+  children,
+}: ContactUsModalProps) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        {children || (
+          <Button className={cn(className)}>Связаться с нами</Button>
+        )}
+      </DialogTrigger>
+      <DialogContent className='flex max-w-2xl flex-col justify-between gap-0 overflow-auto px-10 pb-10 pt-14'>
+        <DialogTitle className='mb-6 text-left text-2xl font-medium'>
+          Связаться с нами
+        </DialogTitle>
+
+        <ContactUsForm onClose={() => setOpen(false)} />
+      </DialogContent>
+    </Dialog>
+  );
+}
