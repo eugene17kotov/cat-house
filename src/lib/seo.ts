@@ -1,32 +1,31 @@
 import { DefaultSeoProps } from 'next-seo';
 
 export const defaultSEO: DefaultSeoProps = {
-  title: 'cat house',
-  description: 'A curated list of awesome cats cared by cat-house',
+  title: 'Котодом',
+  description: 'Подборка замечательных котиков, о которых заботится Котодом',
   canonical: 'https://cat-house-msk.vercel.app/',
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: 'ru_RU',
     url: 'https://cat-house-msk.vercel.app/',
-    siteName: 'cat house',
+    siteName: 'Котодом',
     images: [
       {
-        url: '/logo.png',
-        width: 1200,
-        height: 630,
-        alt: 'cat house',
+        url: 'https://cat-house-msk.vercel.app/seo.png',
+        width: 1024,
+        height: 610,
+        alt: 'Котодом',
       },
     ],
   },
   twitter: {
     handle: '@eugene17kotov',
-    site: '@site',
     cardType: 'summary_large_image',
   },
   additionalMetaTags: [
     {
       name: 'keywords',
-      content: 'cat house, cats',
+      content: 'cat house, котодом, кошки, коты, приют для котов',
     },
   ],
 };
