@@ -6,7 +6,7 @@ import Donation from '@/components/donation';
 import { Footer } from '@/components/layout/footer';
 import Head from 'next/head';
 import { Header } from '@/components/layout/header';
-import Script from 'next/script';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 import { defaultSEO } from '@/lib/seo';
@@ -21,19 +21,12 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Script
-        async
-        src='https://www.googletagmanager.com/gtag/js?id=G-Z7T46RLKL7'
-      />
-      <Script id='google-analytics' strategy='afterInteractive'>
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-Z7T46RLKL7');
-        `}
-      </Script>
+
+      {/* Google Analytics */}
+      <GoogleAnalytics gaId='G-Z7T46RLKL7' />
+
       <DefaultSeo {...defaultSEO} />
+
       <ThemeProvider
         attribute='class'
         defaultTheme='system'
