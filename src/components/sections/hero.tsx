@@ -34,19 +34,19 @@ export default function Hero() {
       animate='visible'
     >
       <motion.div variants={itemVariants}>
-        <img src='/logo.svg' alt='cat-house logo' className='max-h-36' />
+        <img src='/logo.svg' alt='Котодом лого' className='max-h-36' />
       </motion.div>
       <motion.h1
         className='text-4xl font-bold tracking-tighter sm:text-5xl'
         variants={itemVariants}
       >
-        cat-house
+        Котодом
       </motion.h1>
       <motion.p
         className='max-w-[900px] text-muted-foreground'
         variants={itemVariants}
       >
-        A curated list of awesome cats cared by cat-house.
+        Подборка замечательных котиков, о которых заботится Котодом.
       </motion.p>
     </motion.div>
   );

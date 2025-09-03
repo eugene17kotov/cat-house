@@ -121,12 +121,12 @@ export default function ContactUsForm({ onClose }: { onClose?: () => void }) {
           )}
         />
 
-        <div className='flex gap-2'>
+        <div className='flex flex-col md:flex-row gap-4 dark:md:gap-0'>
           <FormField
             control={form.control}
             name='contactType'
             render={({ field }) => (
-              <FormItem className='w-1/2'>
+              <FormItem className='w-full md:w-1/2'>
                 <FormLabel>ТИП КОНТАКТА</FormLabel>
                 <Select
                   onValueChange={field.onChange}
@@ -134,7 +134,7 @@ export default function ContactUsForm({ onClose }: { onClose?: () => void }) {
                   disabled={isPending}
                 >
                   <FormControl>
-                    <SelectTrigger className='rounded-r-none border-r-0'>
+                    <SelectTrigger className='md:rounded-r-none dark:md:border-r-0'>
                       <SelectValue placeholder='Выберите тип' />
                     </SelectTrigger>
                   </FormControl>
@@ -155,11 +155,11 @@ export default function ContactUsForm({ onClose }: { onClose?: () => void }) {
             control={form.control}
             name='contact'
             render={({ field }) => (
-              <FormItem className='w-1/2'>
+              <FormItem className='w-full md:w-1/2 dark:md:border-l-0'>
                 <FormLabel>КОНТАКТНАЯ ИНФОРМАЦИЯ</FormLabel>
                 <FormControl>
                   <Input
-                    className='rounded-l-none'
+                    className=' md:rounded-l-none'
                     placeholder={
                       contactPlaceholders[form.watch('contactType')] ||
                       'Введите контакт'

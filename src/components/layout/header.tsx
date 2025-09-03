@@ -4,21 +4,24 @@ import Link from 'next/link';
 import { ModeToggle } from '@/components/ui/theme-toggle';
 import ContactUsModal from '@/components/contact-us-modal';
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 
 export function Header() {
   return (
     <header className='sticky top-0 z-50 border-b bg-background/40 backdrop-blur px-4'>
-      <div className='flex items-center justify-between py-4'>
-        <Link href='/' className='flex items-center gap-x-2.5'>
-          <img
-            src='logo.png'
+      <div className='flex items-center md:justify-between py-4'>
+        <Link href='/' className='items-center gap-x-2.5 hidden md:flex'>
+          <Image
+            src='/logo.png'
             alt='logo'
-            className='hidden md:block h-10 w-auto'
+            className='w-auto'
+            width={40}
+            height={40}
           />
-          <p className='font-bold'>cat-house</p>
+          <p className='font-bold  text-lg'>Котодом</p>
         </Link>
 
-        <div className='flex items-center gap-3'>
+        <div className='flex w-full md:w-auto items-center justify-between md:justify-end gap-3'>
           <ContactUsModal>
             <Button
               variant='outline'

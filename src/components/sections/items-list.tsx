@@ -46,9 +46,10 @@ export default function ItemList({
   const [itemsPerPage, setItemsPerPage] = useState(ITEMS_PER_PAGE_OPTIONS[0]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedGenders, setSelectedGenders] = useState<string[]>([]);
   const [sortOption, setSortOption] = useState<SortOption>('name-asc');
   const [isLoading, setIsLoading] = useState(true);
-  const [layoutType, setLayoutType] = useState<LayoutType>('grid');
+  const [layoutType, setLayoutType] = useState<LayoutType>('compact');
 
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
   const { bookmarkedItems, toggleBookmark } = useBookmarks();
@@ -60,6 +61,14 @@ export default function ItemList({
         value: category.title,
       })),
     [categories],
+  );
+
+  const genderOptions = useMemo(
+    () => [
+      { label: 'Самец', value: 'male' },
+      { label: 'Самка', value: 'female' },
+    ],
+    [],
   );
 
   const sortItems = useCallback(
@@ -106,11 +115,21 @@ export default function ItemList({
       );
     }
 
+    if (selectedGenders.length > 0) {
+      filtered = filtered.filter(item => selectedGenders.includes(item.gender));
+    }
+
     const sortedItems = sortItems(filtered);
 
     setFilteredItems(sortedItems);
     setCurrentPage(1);
-  }, [initialItems, debouncedSearchQuery, selectedCategories, sortItems]);
+  }, [
+    initialItems,
+    debouncedSearchQuery,
+    selectedCategories,
+    selectedGenders,
+    sortItems,
+  ]);
 
   useEffect(() => {
     filterAndSortItems();
@@ -200,7 +219,7 @@ export default function ItemList({
   }, [layoutType]);
 
   return (
-    <div className='space-y-6'>
+    <div className='space-y-8'>
       <div className='flex flex-col sm:flex-row justify-between items-center gap-4'>
         {/* Search Filter */}
         <SearchFilterControls
@@ -209,12 +228,15 @@ export default function ItemList({
           categoryOptions={categoryOptions}
           selectedCategories={selectedCategories}
           setSelectedCategories={setSelectedCategories}
+          genderOptions={genderOptions}
+          selectedGenders={selectedGenders}
+          setSelectedGenders={setSelectedGenders}
           sortOption={sortOption}
           onSortChange={handleSortChange}
         />
 
         {/* Layout Toggle */}
-        <div className='flex items-center justify-end w-full sm:w-auto mt-4 sm:mt-0'>
+        <div className='md:flex items-center justify-end w-full hidden md:w-auto mt-4 md:mt-0'>
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}

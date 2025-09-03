@@ -1,6 +1,7 @@
 export interface Resource {
   id: number;
   name: string;
+  gender: 'male' | 'female';
   primary_image: string;
   all_images: string[];
   description: string;
@@ -8,95 +9,53 @@ export interface Resource {
   age: number;
 }
 
-// Локальные данные котиков
-const CATS_DATA: Resource[] = [
+type CatBase = Omit<Resource, 'primary_image' | 'all_images'>;
+
+type CatWithCount = CatBase & {
+  imagesCount: number;
+};
+
+const CATS_DATA: CatWithCount[] = [
   {
     id: 1,
-    name: 'Мурка',
-    primary_image:
-      'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400',
-    all_images: [
-      'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800',
-      'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=800',
-      'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=800',
-    ],
-    description: 'Ласковая и игривая кошка с красивыми зелеными глазами',
-    color: 'Серый',
-    age: 3,
+    name: 'Балерун',
+    gender: 'male',
+    description:
+      'Очень ласковый, ручной, любит компанию человека, но при этом самостоятельный взрослый кот, который не будет навязываться. Ладит с котами (самцами), но дерётся с кошками. Отдается либо одним питомцем, либо вторым котиком, строго к мальчику. Здоров. Кастрирован.',
+    color: 'Табби с белым',
+    age: 4,
+    imagesCount: 4,
   },
   {
     id: 2,
-    name: 'Барсик',
-    primary_image:
-      'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400',
-    all_images: [
-      'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=800',
-      'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800',
-    ],
-    description: 'Большой и мягкий кот, любит спать на солнышке',
-    color: 'Рыжий',
-    age: 5,
-  },
-  {
-    id: 3,
-    name: 'Снежинка',
-    primary_image:
-      'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=400',
-    all_images: [
-      'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=800',
-      'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=800',
-      'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800',
-    ],
-    description: 'Белая кошка с длинной шерстью, очень чистоплотная',
-    color: 'Белый',
-    age: 2,
-  },
-  {
-    id: 4,
-    name: 'Черныш',
-    primary_image:
-      'https://images.unsplash.com/photo-1513245543132-31f507417b26?w=400',
-    all_images: [
-      'https://images.unsplash.com/photo-1513245543132-31f507417b26?w=800',
-      'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=800',
-    ],
-    description: 'Элегантный черный кот с золотыми глазами',
-    color: 'Черный',
-    age: 4,
-  },
-  {
-    id: 5,
-    name: 'Рыжик',
-    primary_image:
-      'https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=400',
-    all_images: [
-      'https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=800',
-      'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800',
-    ],
-    description: 'Энергичный рыжий кот, любит играть с мячиком',
-    color: 'Рыжий',
-    age: 1,
-  },
-  {
-    id: 6,
-    name: 'Серая',
-    primary_image:
-      'https://images.unsplash.com/photo-1551717743-49959800b1f6?w=400',
-    all_images: [
-      'https://images.unsplash.com/photo-1551717743-49959800b1f6?w=800',
-      'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=800',
-    ],
-    description: 'Спокойная серая кошка, идеальна для семьи с детьми',
-    color: 'Серый',
-    age: 6,
+    name: 'Мурзик',
+    gender: 'male',
+    description:
+      'Ласковый, ручной котик. Хорошо ладит с котами и кошками. Кастрирован. Готов поехать на доживание в семью. Лейкоз положительный, отдается либо одним котом либо к лейкозным',
+    color: 'Табби',
+    age: 16,
+    imagesCount: 3,
   },
 ];
 
+/**
+ * Генерує шляхи для картинок кота за його id і кількістю фото
+ */
+function getCatImages(id: number, count: number): string[] {
+  return Array.from({ length: count }, (_, i) => `/cats/${id}/${i + 1}.jpg`);
+}
+
+const RESOURCES: Resource[] = CATS_DATA.map(cat => {
+  const images = getCatImages(cat.id, cat.imagesCount);
+  return {
+    ...cat,
+    primary_image: images[0],
+    all_images: images.length > 0 ? images : [],
+  };
+});
+
 export async function fetchAndParseData(): Promise<Resource[]> {
-  // Имитируем асинхронный запрос
   return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(CATS_DATA);
-    }, 500);
+    setTimeout(() => resolve(RESOURCES), 500);
   });
 }

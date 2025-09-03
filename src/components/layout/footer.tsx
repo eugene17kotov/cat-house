@@ -13,15 +13,15 @@ export function Footer() {
                 alt='logo'
                 className='h-8 w-auto transition-transform'
               />
-              <span className='text-lg font-bold'>cat-house</span>
+              <span className='text-lg font-bold'>Котодом</span>
             </Link>
             <p className='text-sm text-muted-foreground text-center md:text-left max-w-xs'>
-              A curated list of awesome cats cared by cat-house.
+              Подборка замечательных котиков, о которых заботится Котодом.
             </p>
           </div>
           <div className='flex flex-col items-center md:items-end space-y-4'>
             <p className='text-sm text-muted-foreground'>
-              © {new Date().getFullYear()} cat-house. All rights reserved.
+              © {new Date().getFullYear()} Котодом. All rights reserved.
             </p>
           </div>
         </div>

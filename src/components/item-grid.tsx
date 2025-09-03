@@ -2,6 +2,7 @@ import { Resource } from '@/hooks/use-data';
 import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import { useCallback } from 'react';
 import ItemCard from './item-card';
+import { Ghost } from 'lucide-react';
 
 type LayoutType = 'compact' | 'grid';
 
@@ -65,22 +66,10 @@ export function ItemGrid({
           transition={{ duration: 0.3 }}
           className='inline-flex justify-center items-center w-16 h-16 rounded-full bg-neutral-200 dark:bg-neutral-800 mb-4'
         >
-          <svg
-            className='w-8 h-8 text-neutral-500 dark:text-neutral-400'
-            fill='none'
-            viewBox='0 0 24 24'
-            stroke='currentColor'
-          >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth={1.5}
-              d='M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
-            />
-          </svg>
+          <Ghost className='size-8 text-neutral-500' />
         </motion.div>
         <p className='text-muted-foreground text-lg font-medium'>
-          Не найдено элементов, соответствующих вашим критериям.
+          Не найдено котиков, соответствующих вашим критериям.
         </p>
         <p className='text-muted-foreground text-sm mt-1'>
           Попробуйте изменить настройки поиска или фильтрации.
@@ -108,6 +97,7 @@ export function ItemGrid({
               all_images={item.all_images}
               color={item.color}
               age={item.age}
+              gender={item.gender}
               isBookmarked={bookmarkedItems.includes(item.id)}
               onBookmark={onBookmark}
               layoutType={layoutType}

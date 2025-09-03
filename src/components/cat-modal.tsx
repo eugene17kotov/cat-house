@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import ContactUsModal from './contact-us-modal';
+import CatImage from './cat-image';
 
 interface CatModalProps {
   isOpen: boolean;
@@ -23,6 +24,7 @@ interface CatModalProps {
     all_images: string[];
     color: string;
     age: number;
+    gender: 'male' | 'female';
   } | null;
 }
 
@@ -36,6 +38,11 @@ export default function CatModal({ isOpen, onClose, cat }: CatModalProps) {
     if (age === 1) return '1 год';
     if (age >= 2 && age <= 4) return `${age} года`;
     return `${age} лет`;
+  };
+
+  // Функция для получения иконки гендера
+  const getGenderIcon = (gender: 'male' | 'female') => {
+    return gender === 'male' ? '/mars.svg' : '/venus.svg';
   };
 
   const nextImage = () => {
@@ -62,7 +69,7 @@ export default function CatModal({ isOpen, onClose, cat }: CatModalProps) {
           <div className='space-y-4'>
             {/* Главное изображение */}
             <div className='relative aspect-square overflow-hidden rounded-lg bg-gray-100'>
-              <Image
+              <CatImage
                 src={cat.all_images[currentImageIndex]}
                 alt={`${cat.name} - фото ${currentImageIndex + 1}`}
                 fill
@@ -114,7 +121,7 @@ export default function CatModal({ isOpen, onClose, cat }: CatModalProps) {
                         : 'border-gray-200 hover:border-gray-300',
                     )}
                   >
-                    <Image
+                    <CatImage
                       src={image}
                       alt={`${cat.name} - миниатюра ${index + 1}`}
                       fill
@@ -139,6 +146,13 @@ export default function CatModal({ isOpen, onClose, cat }: CatModalProps) {
                   <Clock className='h-4 w-4 mr-1' />
                   <span className='text-sm'>{getAgeText(cat.age)}</span>
                 </div>
+                <CatImage
+                  src={getGenderIcon(cat.gender)}
+                  alt={cat.gender === 'male' ? 'Самец' : 'Самка'}
+                  width={16}
+                  height={16}
+                  className='mr-1'
+                />
               </div>
 
               <div className='space-y-2'>

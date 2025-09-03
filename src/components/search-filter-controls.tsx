@@ -11,6 +11,9 @@ interface SearchFilterControlsProps {
   categoryOptions: { label: string; value: string }[];
   selectedCategories: string[];
   setSelectedCategories: (categories: string[]) => void;
+  genderOptions: { label: string; value: string }[];
+  selectedGenders: string[];
+  setSelectedGenders: (genders: string[]) => void;
   sortOption: SortOption;
   onSortChange: (option: SortOption) => void;
 }
@@ -21,6 +24,9 @@ export function SearchFilterControls({
   categoryOptions,
   selectedCategories,
   setSelectedCategories,
+  genderOptions,
+  selectedGenders,
+  setSelectedGenders,
   sortOption,
   onSortChange,
 }: SearchFilterControlsProps) {
@@ -33,7 +39,7 @@ export function SearchFilterControls({
 
   return (
     <motion.div
-      className='flex flex-col sm:flex-row justify-between items-center gap-4'
+      className='flex w-full flex-col md:flex-row justify-between items-center gap-4'
       variants={{
         hidden: { opacity: 0 },
         visible: {
@@ -49,15 +55,22 @@ export function SearchFilterControls({
         placeholder='Поиск по именам...'
         value={searchQuery}
         onChange={handleSearchChange}
-        className='w-full sm:w-64'
+        className='w-full md:w-80'
       />
-      <div className='w-full sm:w-auto flex flex-row items-center gap-4'>
+      <div className='w-full md:w-auto flex flex-col md:flex-row items-center gap-4'>
         <MultiSelect
           options={categoryOptions}
           value={selectedCategories}
           onValueChange={setSelectedCategories}
           placeholder='Выбрать окрас'
-          className='w-full sm:w-64'
+          className='w-full md:w-64'
+        />
+        <MultiSelect
+          options={genderOptions}
+          value={selectedGenders}
+          onValueChange={setSelectedGenders}
+          placeholder='Выбрать пол'
+          className='w-full md:w-48'
         />
         <Sort sortOption={sortOption} onSortChange={onSortChange} />
       </div>

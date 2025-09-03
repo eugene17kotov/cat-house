@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { ArrowUpRight, Bookmark, Clock, ExternalLink } from 'lucide-react';
+import { ArrowUpRight, Bookmark, Clock } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -13,7 +13,7 @@ import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useMemo, useState } from 'react';
 import CatModal from './cat-modal';
-import Image from 'next/image';
+import CatImage from './cat-image';
 
 type LayoutType = 'compact' | 'grid';
 
@@ -23,6 +23,7 @@ interface ItemCardProps {
   description: string;
   primary_image: string;
   all_images: string[];
+  gender: 'male' | 'female';
   color: string;
   age: number;
   isBookmarked: boolean;
@@ -46,6 +47,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
   all_images,
   color,
   age,
+  gender,
   isBookmarked,
   onBookmark,
   layoutType = 'grid',
@@ -58,18 +60,24 @@ const ItemCard: React.FC<ItemCardProps> = ({
     if (age >= 2 && age <= 4) return `${age} года`;
     return `${age} лет`;
   };
+
+  // Функция для получения иконки гендера
+  const getGenderIcon = (gender: 'male' | 'female') => {
+    return gender === 'male' ? '/mars.svg' : '/venus.svg';
+  };
+
   // Get styling based on layout type
   const styles = useMemo(() => {
     switch (layoutType) {
       case 'compact':
         return {
-          card: 'h-[360px] group border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 transition-all duration-300',
+          card: 'h-[390px] group border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 transition-all duration-300',
           container: 'gap-1',
           title:
             'text-sm font-bold group-hover:text-primary transition-colors duration-300',
           badge: 'text-xs px-2 py-0 h-5 mt-1',
           description:
-            'text-xs opacity-80 group-hover:opacity-100 transition-opacity duration-300 min-h-[2.5rem] line-clamp-5',
+            'text-xs opacity-80 group-hover:opacity-100 transition-opacity duration-300 min-h-[2.5rem] line-clamp-4 overflow-hidden text-ellipsis',
           date: 'text-xs opacity-60',
           button: 'text-xs py-1 h-7',
           bookmarkBtn: 'h-7 w-7',
@@ -77,7 +85,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
           headerPadding: 'p-3 pb-1',
           contentPadding: 'px-3 py-1.5',
           footerPadding: 'px-3 pb-3 pt-1.5',
-          headerHeight: 'h-[40px]',
+          headerHeight: 'h-[70px]',
           contentHeight: 'h-[80px]',
           footerHeight: 'h-[34px]',
         };
@@ -85,13 +93,13 @@ const ItemCard: React.FC<ItemCardProps> = ({
       case 'grid':
       default:
         return {
-          card: 'h-[420px] group border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 hover:shadow-md dark:hover:shadow-2xl dark:hover:shadow-neutral-900/20 transition-all duration-300',
+          card: 'h-[430px] group border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 hover:shadow-md dark:hover:shadow-2xl dark:hover:shadow-neutral-900/20 transition-all duration-300',
           container: 'gap-3',
           title:
             'text-lg font-bold group-hover:text-primary transition-colors duration-300',
           badge: 'text-xs',
           description:
-            'text-sm opacity-90 group-hover:opacity-100 transition-opacity duration-300 min-h-[4.5rem] line-clamp-5',
+            'text-sm opacity-90 group-hover:opacity-100 transition-opacity duration-300 min-h-[4.5rem] line-clamp-4 overflow-hidden text-ellipsis',
           date: 'text-xs opacity-70',
           button: 'text-sm',
           bookmarkBtn: 'h-10 w-10',
@@ -99,7 +107,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
           headerPadding: 'p-4 pb-2',
           contentPadding: 'px-4 py-2',
           footerPadding: 'px-4 pt-2 pb-4',
-          headerHeight: 'h-[60px]',
+          headerHeight: 'h-[70px]',
           contentHeight: 'h-[100px]',
           footerHeight: 'h-[40px]',
         };
@@ -116,7 +124,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
 
         {/* Primary Image */}
         <div className='relative h-40 md:h-48 overflow-hidden'>
-          <Image
+          <CatImage
             src={primary_image}
             alt={title}
             fill
@@ -135,10 +143,10 @@ const ItemCard: React.FC<ItemCardProps> = ({
             )}
           >
             {layoutType === 'compact' ? (
-              // Compact layout - Title and badge stacked vertically
-              <div className='flex justify-between items-center gap-2'>
+              // Compact layout - Title and info in separate rows
+              <div className='space-y-2'>
                 <CardTitle className={styles.title}>{title}</CardTitle>
-                <div className='flex items-center gap-2 mt-1'>
+                <div className='flex items-center gap-3 text-xs'>
                   <Badge
                     variant='secondary'
                     className={cn(
@@ -148,19 +156,24 @@ const ItemCard: React.FC<ItemCardProps> = ({
                   >
                     {color}
                   </Badge>
-                  <div className='flex items-center text-muted-foreground'>
-                    <Clock className='h-3 w-3 mr-1 opacity-70' />
-                    <span className='text-xs opacity-60'>
-                      {getAgeText(age)}
-                    </span>
+                  <div className='flex items-center'>
+                    <Clock className='size-5 mr-1 opacity-70' />
+                    <span>{getAgeText(age)}</span>
                   </div>
+                  <CatImage
+                    src={getGenderIcon(gender)}
+                    alt={gender === 'male' ? 'Самец' : 'Самка'}
+                    width={20}
+                    height={20}
+                    className='mr-1'
+                  />
                 </div>
               </div>
             ) : (
-              // Grid layout - Title and badge side by side
+              // Grid layout - Title and info side by side
               <div className='flex justify-between items-start gap-2'>
                 <CardTitle className={styles.title}>{title}</CardTitle>
-                <div className='flex flex-col items-end gap-1'>
+                <div className='flex flex-col items-end gap-2'>
                   <Badge
                     variant='secondary'
                     className={cn(
@@ -170,11 +183,18 @@ const ItemCard: React.FC<ItemCardProps> = ({
                   >
                     {color}
                   </Badge>
-                  <div className='flex items-center text-muted-foreground'>
-                    <Clock className='h-3 w-3 mr-1 opacity-70' />
-                    <span className='text-xs opacity-70'>
-                      {getAgeText(age)}
-                    </span>
+                  <div className='flex items-center gap-3'>
+                    <div className='flex items-center'>
+                      <Clock className='size-5 mr-1 opacity-70' />
+                      <span className='text-sm'>{getAgeText(age)}</span>
+                    </div>
+                    <CatImage
+                      src={getGenderIcon(gender)}
+                      alt={gender === 'male' ? 'Самец' : 'Самка'}
+                      width={20}
+                      height={20}
+                      className='mr-1'
+                    />
                   </div>
                 </div>
               </div>
@@ -183,7 +203,6 @@ const ItemCard: React.FC<ItemCardProps> = ({
 
           <CardContent
             className={cn(
-              // 'flex-grow',
               styles.contentPadding,
               styles.contentHeight,
               'transition-all duration-300',
@@ -244,20 +263,9 @@ const ItemCard: React.FC<ItemCardProps> = ({
               onClick={() => setIsModalOpen(true)}
             >
               <span className='relative z-10 flex items-center'>
-                {layoutType === 'compact'
-                  ? 'Больше фото'
-                  : 'Посмотреть больше фото...'}
+                Узнать больше
                 <span className='inline-block transition-transform duration-300 group-hover:translate-x-1'>
-                  {layoutType === 'compact' ? (
-                    <ArrowUpRight className={cn('ml-1', styles.icon)} />
-                  ) : (
-                    <ExternalLink
-                      className={cn(
-                        'ml-1.5',
-                        styles.icon === 'h-5 w-5' ? 'h-4 w-4' : styles.icon,
-                      )}
-                    />
-                  )}
+                  <ArrowUpRight className={cn('ml-1', styles.icon)} />
                 </span>
               </span>
               <span className='absolute inset-0 bg-primary/10 dark:bg-primary/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300'></span>
@@ -278,6 +286,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
           all_images,
           color,
           age,
+          gender,
         }}
       />
     </motion.div>

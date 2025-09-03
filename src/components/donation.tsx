@@ -9,7 +9,7 @@ export default function Donation() {
         className='
           fixed bottom-4 right-4 z-50 h-20
           flex flex-col gap-2 
-          rounded-full p-4 
+          rounded-3xl p-4 
           bg-[#ffe433]/90 hover:bg-[#ffe433] 
           text-black font-semibold 
           transition-all duration-300 ease-in-out
