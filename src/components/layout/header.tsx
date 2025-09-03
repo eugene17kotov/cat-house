@@ -45,7 +45,7 @@ export function Header() {
                 <Button
                   variant='ghost'
                   size='icon'
-                  className='h-10 w-10 hover:bg-primary/10 transition-colors'
+                  className='h-10 w-10 rounded-full hover:bg-primary/10 transition-colors'
                   asChild
                 >
                   <Link
