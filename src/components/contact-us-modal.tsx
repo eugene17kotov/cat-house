@@ -5,6 +5,7 @@ import ContactUsForm from './contact-us-form';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
@@ -14,11 +15,13 @@ import { Button } from '@/components/ui/button';
 interface ContactUsModalProps {
   className?: string;
   children?: React.ReactNode;
+  catName?: string;
 }
 
 export default function ContactUsModal({
   className,
   children,
+  catName,
 }: ContactUsModalProps) {
   const [open, setOpen] = useState(false);
 
@@ -31,10 +34,17 @@ export default function ContactUsModal({
       </DialogTrigger>
       <DialogContent className='flex max-w-2xl flex-col justify-between gap-0 overflow-auto px-10 pb-10 pt-14'>
         <DialogTitle className='mb-6 text-left text-2xl font-medium'>
-          Связаться с нами
+          {catName
+            ? `Связаться с нами по поводу ${catName}`
+            : 'Связаться с нами'}
         </DialogTitle>
+        <DialogDescription className='mb-4 text-muted-foreground'>
+          {catName
+            ? `Заполните форму ниже, чтобы связаться с нами по поводу кота ${catName}. Мы ответим вам в ближайшее время.`
+            : 'Заполните форму ниже, чтобы связаться с нами. Мы ответим вам в ближайшее время.'}
+        </DialogDescription>
 
-        <ContactUsForm onClose={() => setOpen(false)} />
+        <ContactUsForm onClose={() => setOpen(false)} catName={catName} />
       </DialogContent>
     </Dialog>
   );

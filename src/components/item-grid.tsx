@@ -87,7 +87,7 @@ export function ItemGrid({
           {...standardAnimations.container}
           layout
         >
-          {items.map(item => (
+          {items.map((item, index) => (
             <ItemCard
               key={`${item.id}-${layoutType}`}
               id={item.id}
@@ -101,6 +101,7 @@ export function ItemGrid({
               isBookmarked={bookmarkedItems.includes(item.id)}
               onBookmark={onBookmark}
               layoutType={layoutType}
+              priority={index === 0}
             />
           ))}
         </motion.div>

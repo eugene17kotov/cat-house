@@ -1,6 +1,7 @@
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
@@ -60,7 +61,12 @@ export default function CatModal({ isOpen, onClose, cat }: CatModalProps) {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className='max-w-4xl max-h-[90vh] overflow-hidden'>
         <DialogHeader className='flex flex-row items-center justify-between space-y-0 pb-4'>
-          <DialogTitle className='text-2xl font-bold'>{cat.name}</DialogTitle>
+          <div>
+            <DialogTitle className='text-2xl font-bold'>{cat.name}</DialogTitle>
+            <DialogDescription className='sr-only text-muted-foreground mt-1'>
+              Подробная информация о коте и галерея фотографий
+            </DialogDescription>
+          </div>
         </DialogHeader>
 
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 max-h-[70vh] overflow-y-auto'>
@@ -164,7 +170,7 @@ export default function CatModal({ isOpen, onClose, cat }: CatModalProps) {
 
             {/* Кнопки действий */}
             <div className='flex gap-3 mt-auto'>
-              <ContactUsModal className='flex-1'>
+              <ContactUsModal className='flex-1' catName={cat.name}>
                 <Button className='w-full'>Связаться с нами</Button>
               </ContactUsModal>
             </div>

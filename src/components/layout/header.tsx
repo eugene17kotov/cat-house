@@ -4,7 +4,14 @@ import Link from 'next/link';
 import { ModeToggle } from '@/components/ui/theme-toggle';
 import ContactUsModal from '@/components/contact-us-modal';
 import { Button } from '@/components/ui/button';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import Image from 'next/image';
+import { Send } from 'lucide-react';
 
 export function Header() {
   return (
@@ -31,6 +38,35 @@ export function Header() {
               Связаться с нами
             </Button>
           </ContactUsModal>
+
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant='ghost'
+                  size='icon'
+                  className='h-10 w-10 hover:bg-primary/10 transition-colors'
+                  asChild
+                >
+                  <Link
+                    href='https://t.me/murrmafia'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    aria-label='Telegram группа MurrMafia'
+                  >
+                    <div className='relative'>
+                      <Send className='w-6 h-6 text-primary' />
+                      <div className='absolute -inset-3 border border-primary/20 rounded-full'></div>
+                    </div>
+                  </Link>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side='bottom' align='center'>
+                <p>Telegram группа MurrMafia</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+
           <ModeToggle />
         </div>
       </div>

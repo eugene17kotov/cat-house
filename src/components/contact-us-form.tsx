@@ -9,6 +9,7 @@ import {
   FormControl,
   FormMessage,
 } from '@/components/ui/form';
+
 import {
   Select,
   SelectContent,
@@ -50,7 +51,7 @@ const contactOptions = [
 
 const contactPlaceholders: Record<string, string> = {
   email: 'Введите ваш email',
-  telegram: 'Введите Telegram (@вашusername)',
+  telegram: 'Введите Telegram (@ваш_username)',
   phone: 'Введите номер телефона',
   whatsapp: 'Введите WhatsApp (+1234567890)',
   other: 'Введите ваши контактные данные',
@@ -61,24 +62,32 @@ const schema = z.object({
   contactType: z.string().min(1, 'Тип контакта обязателен'),
   contact: z.string().min(1, 'Контактная информация обязательна'),
   message: z.string().min(1, 'Сообщение обязательно'),
-  //   privacyPolicyAccepted: z.boolean().refine(val => val === true, {
-  //     message: 'Необходимо принять Политику конфиденциальности',
-  //   }),
+  catName: z.string().optional(),
+  website: z.string().optional(), // honeypot поле
 });
 
 type ContactFormValues = z.infer<typeof schema>;
 
-export default function ContactUsForm({ onClose }: { onClose?: () => void }) {
+interface ContactUsFormProps {
+  onClose?: () => void;
+  catName?: string;
+}
+
+export default function ContactUsForm({
+  onClose,
+  catName,
+}: ContactUsFormProps) {
   const [isPending, setIsPending] = useState(false);
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
       name: '',
-      contact: '',
       contactType: '',
+      contact: '',
       message: '',
-      //   privacyPolicyAccepted: false,
+      catName: catName || '',
+      website: '', // honeypot поле - всегда пустое
     },
   });
 
@@ -86,16 +95,30 @@ export default function ContactUsForm({ onClose }: { onClose?: () => void }) {
     try {
       setIsPending(true);
 
-      // Имитируем отправку сообщения
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await fetch('/api/send-telegram', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
 
-      console.log('Contact form submitted:', values);
+      const data = await response.json();
 
-      toast.success('Мы получили ваше сообщение!');
+      if (!response.ok) {
+        throw new Error(data.error || 'Ошибка отправки');
+      }
+
+      toast.success(data.message || 'Сообщение успешно отправлено!');
       form.reset();
       onClose?.();
-    } catch {
-      toast.error('Не удалось отправить сообщение. Попробуйте еще раз.');
+    } catch (error) {
+      console.error('Ошибка отправки формы:', error);
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : 'Не удалось отправить сообщение. Попробуйте еще раз.',
+      );
     } finally {
       setIsPending(false);
     }
@@ -159,7 +182,7 @@ export default function ContactUsForm({ onClose }: { onClose?: () => void }) {
                 <FormLabel>КОНТАКТНАЯ ИНФОРМАЦИЯ</FormLabel>
                 <FormControl>
                   <Input
-                    className=' md:rounded-l-none'
+                    className='md:rounded-l-none'
                     placeholder={
                       contactPlaceholders[form.watch('contactType')] ||
                       'Введите контакт'
@@ -189,6 +212,25 @@ export default function ContactUsForm({ onClose }: { onClose?: () => void }) {
                 />
               </FormControl>
               <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Honeypot поле - приховане от пользователей */}
+        <FormField
+          control={form.control}
+          name='website'
+          render={({ field }) => (
+            <FormItem className='hidden'>
+              <FormControl>
+                <Input
+                  type='text'
+                  tabIndex={-1}
+                  autoComplete='off'
+                  style={{ display: 'none' }}
+                  {...field}
+                />
+              </FormControl>
             </FormItem>
           )}
         />

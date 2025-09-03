@@ -36,6 +36,16 @@ const CATS_DATA: CatWithCount[] = [
     age: 16,
     imagesCount: 3,
   },
+  {
+    id: 3,
+    name: 'Маша',
+    gender: 'female',
+    description:
+      'Ласковая, здоровая кошка ищет свою семью. Очень тактильная, пушистая, нежная кошка. Ладит с другими котами и кошками',
+    color: 'Черепаховый',
+    age: 5,
+    imagesCount: 2,
+  },
 ];
 
 /**

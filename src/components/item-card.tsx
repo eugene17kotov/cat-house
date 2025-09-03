@@ -29,6 +29,7 @@ interface ItemCardProps {
   isBookmarked: boolean;
   onBookmark: (id: number) => void;
   layoutType: LayoutType;
+  priority?: boolean;
 }
 
 // Standard animation settings to ensure consistency
@@ -51,6 +52,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
   isBookmarked,
   onBookmark,
   layoutType = 'grid',
+  priority = false,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -130,6 +132,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
             fill
             className='object-cover transition-transform duration-300 group-hover:scale-105'
             sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+            priority={priority}
           />
           <div className='absolute inset-0 bg-gradient-to-t from-black/20 to-transparent' />
         </div>
