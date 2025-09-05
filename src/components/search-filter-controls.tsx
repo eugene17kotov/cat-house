@@ -4,6 +4,7 @@ import { MultiSelect } from '@/components/ui/multi-select';
 import { motion } from 'framer-motion';
 import type React from 'react';
 import { useCallback } from 'react';
+import { Palette, Users } from 'lucide-react';
 
 interface SearchFilterControlsProps {
   searchQuery: string;
@@ -37,6 +38,10 @@ export function SearchFilterControls({
     [setSearchQuery],
   );
 
+  const handleClearSearch = useCallback(() => {
+    setSearchQuery('');
+  }, [setSearchQuery]);
+
   return (
     <motion.div
       className='flex w-full flex-col md:flex-row justify-between items-center gap-4'
@@ -55,6 +60,8 @@ export function SearchFilterControls({
         placeholder='Поиск по именам...'
         value={searchQuery}
         onChange={handleSearchChange}
+        onClear={handleClearSearch}
+        showClearButton={true}
         className='w-full md:w-80'
       />
       <div className='w-full md:w-auto flex flex-col md:flex-row items-center gap-4'>
@@ -63,6 +70,7 @@ export function SearchFilterControls({
           value={selectedCategories}
           onValueChange={setSelectedCategories}
           placeholder='Выбрать окрас'
+          icon={Palette}
           className='w-full md:w-64'
         />
         <MultiSelect
@@ -70,6 +78,7 @@ export function SearchFilterControls({
           value={selectedGenders}
           onValueChange={setSelectedGenders}
           placeholder='Выбрать пол'
+          icon={Users}
           className='w-full md:w-48'
         />
         <Sort sortOption={sortOption} onSortChange={onSortChange} />

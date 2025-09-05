@@ -221,7 +221,7 @@ export default async function handler(
 
     // Формуємо повідомлення
     const telegramMessage =
-      `*🐱 Новое сообщение с сайта Котодом*\n\n` +
+      `*🐱 Новое сообщение с сайта Заводские кошки*\n\n` +
       `*👤 Name:* ${nameSafe}\n` +
       `${contactTypeLabels[contactType] || '📞 Contact'}: ${contactSafe}\n` +
       (catSafe ? `*🐾 Cat:* ${catSafe}\n` : '') +

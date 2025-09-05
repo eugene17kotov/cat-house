@@ -1,6 +1,7 @@
 'use client';
 
-import { Resource, fetchAndParseData } from '@/hooks/use-data';
+import { fetchAndParseData } from '@/hooks/use-data';
+import { Resource } from '@/lib/data';
 import { useEffect, useState } from 'react';
 
 import Hero from '@/components/sections/hero';
@@ -84,7 +85,7 @@ export default function Home() {
 
   return (
     <motion.div
-      className='container mx-auto max-w-7xl px-4 py-8'
+      className='container mx-auto max-w-7xl px-4'
       initial='hidden'
       animate='visible'
       variants={containerVariants}
@@ -93,7 +94,7 @@ export default function Home() {
         <Hero />
       </motion.div>
 
-      <motion.div variants={itemVariants} className='my-12'>
+      <motion.div variants={itemVariants} className='my-6 md:my-12'>
         <ItemList items={filteredItems} categories={categories} />
       </motion.div>
     </motion.div>

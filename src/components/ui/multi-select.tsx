@@ -74,6 +74,12 @@ interface MultiSelectProps
   placeholder?: string;
 
   /**
+   * Optional icon component to display alongside the placeholder text.
+   * Similar to the sort component icon positioning.
+   */
+  icon?: React.ComponentType<{ className?: string }>;
+
+  /**
    * Animation duration in seconds for the visual effects (e.g., bouncing badges).
    * Optional, defaults to 0 (no animation).
    */
@@ -115,6 +121,7 @@ export const MultiSelect = React.forwardRef<
     variant,
     defaultValue = [],
     placeholder = 'Выбрать опции',
+    icon: IconComponent,
     maxCount = 3,
     modalPopover = false,
     ...props
@@ -192,7 +199,10 @@ export const MultiSelect = React.forwardRef<
                   return (
                     <Badge
                       key={value}
-                      className={cn(multiSelectVariants({ variant }))}
+                      className={cn(
+                        'font-normal',
+                        multiSelectVariants({ variant }),
+                      )}
                     >
                       {IconComponent && (
                         <IconComponent className='mr-2 size-4' />
@@ -223,7 +233,7 @@ export const MultiSelect = React.forwardRef<
                 {selectedValues.length > maxCount && (
                   <Badge
                     className={cn(
-                      'border-foreground/10 bg-transparent text-foreground hover:bg-transparent',
+                      'border-foreground/10 bg-transparent text-foreground hover:bg-transparent font-normal',
                       multiSelectVariants({ variant }),
                     )}
                   >
@@ -266,7 +276,7 @@ export const MultiSelect = React.forwardRef<
                     }
                   }}
                   aria-label={`Очистить все ${selectedValues.length} выбранных опций`}
-                  className='mx-2 flex size-4 cursor-pointer items-center justify-center rounded-sm text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1'
+                  className='flex size-4 cursor-pointer items-center justify-center rounded-sm text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1'
                 >
                   <XIcon className='size-4' />
                 </div>
@@ -274,15 +284,16 @@ export const MultiSelect = React.forwardRef<
                   orientation='vertical'
                   className='flex h-full min-h-6'
                 />
-                <ChevronDown className='mx-2 h-4 cursor-pointer text-muted-foreground' />
+                <ChevronDown className=' h-4 cursor-pointer text-muted-foreground' />
               </div>
             </div>
           ) : (
             <div className='mx-auto flex w-full items-center justify-between'>
-              <span className='mx-3 text-sm text-muted-foreground'>
+              <span className='flex items-center text-sm font-normal text-foreground'>
+                {IconComponent && <IconComponent className='h-4 w-4 mr-2' />}
                 {placeholder}
               </span>
-              <ChevronDown className='mx-2 h-4 cursor-pointer text-muted-foreground' />
+              <ChevronDown className=' h-4 cursor-pointer text-muted-foreground' />
             </div>
           )}
         </Button>

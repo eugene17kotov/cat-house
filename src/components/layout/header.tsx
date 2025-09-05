@@ -25,7 +25,7 @@ export function Header() {
             width={40}
             height={40}
           />
-          <p className='font-bold  text-lg'>Котодом</p>
+          <p className='font-bold  text-lg'>Заводские кошки</p>
         </Link>
 
         <div className='flex w-full md:w-auto items-center justify-between md:justify-end gap-3'>

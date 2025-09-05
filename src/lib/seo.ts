@@ -1,20 +1,20 @@
 import { DefaultSeoProps } from 'next-seo';
 
 export const defaultSEO: DefaultSeoProps = {
-  title: 'Котодом',
-  description: 'Подборка замечательных котиков, о которых заботится Котодом',
+  title: 'Заводские кошки',
+  description: 'Подборка замечательных котиков для вашего дома',
   canonical: 'https://kotodom.vercel.app/',
   openGraph: {
     type: 'website',
     locale: 'ru_RU',
     url: 'https://kotodom.vercel.app/',
-    siteName: 'Котодом',
+    siteName: 'Заводские кошки',
     images: [
       {
         url: 'https://kotodom.vercel.app/seo.png',
-        width: 1024,
-        height: 610,
-        alt: 'Котодом',
+        width: 800,
+        height: 475,
+        alt: 'Заводские кошки',
       },
     ],
   },
@@ -25,7 +25,7 @@ export const defaultSEO: DefaultSeoProps = {
   additionalMetaTags: [
     {
       name: 'keywords',
-      content: 'котодом, кошки, коты, приют для котов, котики',
+      content: 'заводские кошки, кошки, коты, приют для котов, котики',
     },
   ],
 };

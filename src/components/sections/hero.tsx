@@ -34,19 +34,19 @@ export default function Hero() {
       animate='visible'
     >
       <motion.div variants={itemVariants}>
-        <img src='/logo.svg' alt='Котодом лого' className='max-h-36' />
+        <img src='/logo.svg' alt='Заводские кошки лого' className='max-h-36' />
       </motion.div>
       <motion.h1
         className='text-4xl font-bold tracking-tighter sm:text-5xl'
         variants={itemVariants}
       >
-        Котодом
+        Заводские кошки
       </motion.h1>
       <motion.p
         className='max-w-[900px] text-muted-foreground'
         variants={itemVariants}
       >
-        Подборка замечательных котиков, о которых заботится Котодом.
+        Подборка замечательных котиков для вашего дома.
       </motion.p>
     </motion.div>
   );

@@ -20,10 +20,10 @@ export function Footer() {
                 alt='logo'
                 className='h-8 w-auto transition-transform'
               />
-              <span className='text-lg font-bold'>Котодом</span>
+              <span className='text-lg font-bold'>Заводские кошки</span>
             </Link>
             <p className='text-sm text-muted-foreground text-center md:text-left max-w-xs'>
-              Подборка замечательных котиков, о которых заботится Котодом.
+              Подборка замечательных котиков для вашего дома.
             </p>
           </div>
           <div className='flex items-center space-x-4'>
@@ -57,7 +57,7 @@ export function Footer() {
           </div>
           <div className='flex flex-col items-center md:items-end space-y-4'>
             <p className='text-sm text-muted-foreground'>
-              © {new Date().getFullYear()} Котодом. All rights reserved.
+              © {new Date().getFullYear()} Заводские кошки. All rights reserved.
             </p>
           </div>
         </div>

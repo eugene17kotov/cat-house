@@ -16,7 +16,7 @@ import { ToggleGroup, ToggleGroupItem } from '../ui/toggle-group';
 import { SortOption } from '@/components/sort';
 import { useBookmarks } from '@/hooks/use-bookmark';
 import { useDebounce } from '@/hooks/use-debounce';
-import { Resource } from '@/hooks/use-data';
+import { Resource } from '@/lib/data';
 import { ItemGrid } from '../item-grid';
 import { PaginationControls } from '../pagination-controls';
 import { SearchFilterControls } from '../search-filter-controls';
