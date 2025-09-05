@@ -1,4 +1,4 @@
-import { Resource } from '@/hooks/use-data';
+import { Resource } from '@/lib/data';
 import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import { useCallback } from 'react';
 import ItemCard from './item-card';

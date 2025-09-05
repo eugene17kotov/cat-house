@@ -23,12 +23,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     if (showClearButton && onClear) {
       return (
-        <div className='relative w-full'>
+        <div className='relative w-full md:w-80'>
           <Search className='absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground' />
           <input
             type={type}
             className={cn(
-              'flex h-9 w-full rounded-md border border-input bg-transparent pl-10 pr-4 py-2 pr-8 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
+              'flex h-9 w-full rounded-md border border-input bg-transparent pl-10 py-2 pr-8 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
               className,
             )}
             ref={ref}
