@@ -57,7 +57,8 @@ export function Footer() {
           </div>
           <div className='flex flex-col items-center md:items-end space-y-4'>
             <p className='text-sm text-muted-foreground'>
-              © {new Date().getFullYear()} Заводские кошки. All rights reserved.
+              © 2021-{new Date().getFullYear()} Заводские кошки. All rights
+              reserved.
             </p>
           </div>
         </div>

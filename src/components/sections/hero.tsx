@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import AboutUsModal from '../about-us-modal';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -28,7 +29,7 @@ const itemVariants = {
 export default function Hero() {
   return (
     <motion.div
-      className='flex flex-col items-center justify-center space-y-2 text-center'
+      className='flex flex-col items-center justify-center space-y-2 md:space-y-4 text-center'
       variants={containerVariants}
       initial='hidden'
       animate='visible'
@@ -48,6 +49,20 @@ export default function Hero() {
       >
         Подборка замечательных котиков для вашего дома.
       </motion.p>
+      <motion.p
+        className='max-w-[500px] text-muted-foreground/80 text-sm'
+        variants={itemVariants}
+      >
+        Сайт находится в разработке. Количество котиков доступных для вашего
+        выбора на сайте будет увеличиваться. Следите за обновлениями
+      </motion.p>
+
+      <motion.div>
+        <AboutUsModal
+          className='hidden md:flex w-auto min-w-[180px] items-center text-white hover:text-white bg-blue-500/90 hover:bg-blue-500  px-8 py-3'
+          buttonTitle='Узнать о нас больше'
+        />
+      </motion.div>
     </motion.div>
   );
 }

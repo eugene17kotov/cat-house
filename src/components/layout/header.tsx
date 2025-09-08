@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/tooltip';
 import Image from 'next/image';
 import { Send } from 'lucide-react';
+import AboutUsModal from '../about-us-modal';
 
 export function Header() {
   return (
@@ -29,6 +30,8 @@ export function Header() {
         </Link>
 
         <div className='flex w-full md:w-auto items-center justify-between md:justify-end gap-3'>
+          <AboutUsModal className='variant-ghost' />
+
           <ContactUsModal>
             <Button
               variant='outline'

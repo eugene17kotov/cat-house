@@ -44,7 +44,7 @@ export function SearchFilterControls({
 
   return (
     <motion.div
-      className='flex w-full flex-col md:flex-row justify-between items-center gap-4'
+      className='flex w-full flex-col lg:flex-row justify-between items-center gap-4'
       variants={{
         hidden: { opacity: 0 },
         visible: {
@@ -62,16 +62,16 @@ export function SearchFilterControls({
         onChange={handleSearchChange}
         onClear={handleClearSearch}
         showClearButton={true}
-        className='w-full md:w-80'
+        className='w-full lg:w-64 xl:w-full'
       />
-      <div className='w-full md:w-auto flex flex-col md:flex-row items-center gap-4'>
+      <div className='w-full flex flex-col lg:flex-row items-center gap-4'>
         <MultiSelect
           options={categoryOptions}
           value={selectedCategories}
           onValueChange={setSelectedCategories}
           placeholder='Выбрать окрас'
           icon={Palette}
-          className='w-full md:w-64'
+          className='w-full lg:w-64'
         />
         <MultiSelect
           options={genderOptions}
@@ -79,7 +79,7 @@ export function SearchFilterControls({
           onValueChange={setSelectedGenders}
           placeholder='Выбрать пол'
           icon={Users}
-          className='w-full md:w-48'
+          className='w-full lg:w-48'
         />
         <Sort sortOption={sortOption} onSortChange={onSortChange} />
       </div>

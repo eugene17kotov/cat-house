@@ -220,7 +220,8 @@ export default function ItemList({
 
   return (
     <div className='space-y-8'>
-      <div className='flex flex-col sm:flex-row justify-between items-center gap-4'>
+      {/* Search, Filter, Sort, and Layout Controls */}
+      <div className='flex flex-col lg:flex-row justify-between items-center w-full gap-4'>
         {/* Search Filter */}
         <SearchFilterControls
           searchQuery={searchQuery}
@@ -236,7 +237,7 @@ export default function ItemList({
         />
 
         {/* Layout Toggle */}
-        <div className='md:flex items-center justify-end w-full hidden md:w-auto mt-4 md:mt-0'>
+        <div className='lg:flex items-center justify-end w-full hidden lg:w-auto mt-4 lg:mt-0'>
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}

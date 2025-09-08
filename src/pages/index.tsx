@@ -94,7 +94,7 @@ export default function Home() {
         <Hero />
       </motion.div>
 
-      <motion.div variants={itemVariants} className='my-6 md:my-12'>
+      <motion.div variants={itemVariants} className='my-6 md:my-8'>
         <ItemList items={filteredItems} categories={categories} />
       </motion.div>
     </motion.div>

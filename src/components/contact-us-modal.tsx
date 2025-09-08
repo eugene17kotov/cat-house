@@ -32,7 +32,7 @@ export default function ContactUsModal({
           <Button className={cn(className)}>Связаться с нами</Button>
         )}
       </DialogTrigger>
-      <DialogContent className='flex max-w-2xl flex-col justify-between gap-0 overflow-auto px-10 pb-10 pt-14'>
+      <DialogContent className='flex max-w-2xl rounded-xl flex-col justify-between gap-0 overflow-auto px-10 pb-10 pt-14 w-[calc(100%-2rem)] sm:w-full'>
         <DialogTitle className='mb-6 text-left text-2xl font-medium'>
           {catName
             ? `Связаться с нами по поводу ${catName}`

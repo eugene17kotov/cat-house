@@ -59,7 +59,7 @@ export default function CatModal({ isOpen, onClose, cat }: CatModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className='max-w-4xl max-h-[90vh] overflow-hidden'>
+      <DialogContent className='max-w-4xl rounded-xl max-h-[95vh] overflow-y-auto w-[calc(100%-2rem)]'>
         <DialogHeader className='flex flex-row items-center justify-between space-y-0 pb-4'>
           <div>
             <DialogTitle className='text-2xl font-bold'>{cat.name}</DialogTitle>
@@ -69,17 +69,16 @@ export default function CatModal({ isOpen, onClose, cat }: CatModalProps) {
           </div>
         </DialogHeader>
 
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 max-h-[70vh] overflow-y-auto'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
           {/* Галерея изображений */}
           <div className='space-y-4'>
             {/* Главное изображение */}
-            <div className='relative aspect-square overflow-hidden rounded-lg bg-gray-100'>
+            <div className='relative aspect-square lg:aspect-[4/3] overflow-hidden rounded-lg bg-gray-100'>
               <CatImage
                 src={cat.all_images[currentImageIndex]}
                 alt={`${cat.name} - фото ${currentImageIndex + 1}`}
                 fill
                 className='object-cover'
-                sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
               />
 
               {/* Навигация по изображениям */}
@@ -131,7 +130,6 @@ export default function CatModal({ isOpen, onClose, cat }: CatModalProps) {
                       alt={`${cat.name} - миниатюра ${index + 1}`}
                       fill
                       className='object-cover'
-                      sizes='(max-width: 768px) 25vw, (max-width: 1200px) 12.5vw, 8vw'
                     />
                   </button>
                 ))}

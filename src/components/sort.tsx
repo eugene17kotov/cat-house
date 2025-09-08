@@ -58,7 +58,7 @@ export default function Sort({ sortOption, onSortChange }: SortProps) {
       defaultValue='name-asc'
       onValueChange={handleSortChange}
     >
-      <SelectTrigger className='flex items-center justify-between w-full md:w-[250px]'>
+      <SelectTrigger className='flex items-center justify-between w-full lg:w-[250px]'>
         <SelectValue>
           <span className='flex items-center'>
             {selectedOption.icon}

@@ -23,7 +23,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     if (showClearButton && onClear) {
       return (
-        <div className='relative w-full md:w-80'>
+        <div className='relative w-full'>
           <Search className='absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground' />
           <input
             type={type}
