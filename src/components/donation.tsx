@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { FishSymbol, Coffee } from 'lucide-react';
 import { toast } from 'sonner';
+import Image from 'next/image';
 
 export default function Donation() {
   return (
@@ -24,9 +25,11 @@ export default function Donation() {
       }}
     >
       <div className='flex items-center gap-2'>
-        <Coffee
-          width={30}
-          height={30}
+        <Image
+          src='/bmc-logo-contour-only.svg'
+          alt='Buy me a coffee'
+          width={10}
+          height={10}
           className='transition-transform duration-300 ease-in-out group-hover:rotate-12'
         />
         <p className='hidden line-through sm:inline'>Buy me a coffee</p>
