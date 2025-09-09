@@ -73,7 +73,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
     switch (layoutType) {
       case 'compact':
         return {
-          card: 'h-[390px] group border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 transition-all duration-300',
+          card: 'h-[480px] md:h-[390px] group border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 transition-all duration-300',
           container: 'gap-1',
           title:
             'text-sm font-bold group-hover:text-primary transition-colors duration-300',
@@ -125,7 +125,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
         </div>
 
         {/* Primary Image */}
-        <div className='relative h-40 md:h-48 overflow-hidden'>
+        <div className='relative h-72 md:h-48 overflow-hidden'>
           <CatImage
             src={primary_image}
             alt={title}
