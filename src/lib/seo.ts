@@ -3,15 +3,15 @@ import { DefaultSeoProps } from 'next-seo';
 export const defaultSEO: DefaultSeoProps = {
   title: 'Заводские кошки',
   description: 'Подборка замечательных котиков для вашего дома',
-  canonical: 'https://kotodom.vercel.app/',
+  canonical: 'https://zavodskiekoshki.vercel.app/',
   openGraph: {
     type: 'website',
     locale: 'ru_RU',
-    url: 'https://kotodom.vercel.app/',
+    url: 'https://zavodskiekoshki.vercel.app/',
     siteName: 'Заводские кошки',
     images: [
       {
-        url: 'https://kotodom.vercel.app/seo.png',
+        url: 'https://zavodskiekoshki.vercel.app/seo.png',
         width: 800,
         height: 475,
         alt: 'Заводские кошки',
