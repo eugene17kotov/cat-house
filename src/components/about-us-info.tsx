@@ -18,8 +18,8 @@ export default function AboutUsInfo() {
             обитавшие на заводе.
           </p>
           <p>
-            Волонтёры «Котодома» ежедневно заботится более чем о 70 кошках:
-            кормит, лечит, находит новые семьи. Помещение для кошек
+            Волонтёры «Котодома» ежедневно заботятся более чем о 70 кошках:
+            кормят, лечат, находят новые семьи. Помещение для кошек
             предоставлено компанией ФСК, застройщиком завода.
           </p>
         </div>
@@ -86,7 +86,7 @@ export default function AboutUsInfo() {
         <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
           <div className='bg-gray-50 dark:bg-gray-800 rounded-xl p-6 text-center'>
             <div className='text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2'>
-              198
+              765
             </div>
             <div className='text-sm text-gray-600 dark:text-gray-300'>
               Кошек всего отловлено
@@ -94,7 +94,7 @@ export default function AboutUsInfo() {
           </div>
           <div className='bg-gray-50 dark:bg-gray-800 rounded-xl p-6 text-center'>
             <div className='text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2'>
-              128
+              630
             </div>
             <div className='text-sm text-gray-600 dark:text-gray-300'>
               Пристроено в добрые руки
@@ -102,10 +102,10 @@ export default function AboutUsInfo() {
           </div>
           <div className='bg-gray-50 dark:bg-gray-800 rounded-xl p-6 text-center'>
             <div className='text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2'>
-              70+
+              135
             </div>
             <div className='text-sm text-gray-600 dark:text-gray-300'>
-              Кошек под опекой сейчас
+              Кошек под опекой сейчас (часть на передержке)
             </div>
           </div>
         </div>
@@ -125,7 +125,7 @@ export default function AboutUsInfo() {
           <div className='bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl p-4'>
             <p className='text-amber-800 dark:text-amber-200'>
               <strong>Важно:</strong> В данный момент остро стоит вопрос
-              пристройства кошек, так как завод собираются сносить уже в
+              пристройства кошек, так как помещение собираются сносить уже в
               ближайшее время.
             </p>
           </div>
