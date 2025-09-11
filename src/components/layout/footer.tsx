@@ -37,10 +37,10 @@ export function Footer() {
                     asChild
                   >
                     <Link
-                      href='https://t.me/murrmafia'
+                      href='https://t.me/kotodom_shenogina'
                       target='_blank'
                       rel='noopener noreferrer'
-                      aria-label='Telegram группа MurrMafia'
+                      aria-label='Telegram группа Заводские кошки'
                     >
                       <div className='relative'>
                         <Send className='w-6 h-6 text-primary' />
@@ -50,7 +50,7 @@ export function Footer() {
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent side='top' align='center'>
-                  <p>Telegram группа MurrMafia</p>
+                  <p>Telegram группа Заводские кошки</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
