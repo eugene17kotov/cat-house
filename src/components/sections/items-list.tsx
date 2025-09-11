@@ -43,7 +43,7 @@ export default function ItemList({
 }: ItemListProps) {
   const [filteredItems, setFilteredItems] = useState<Resource[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(ITEMS_PER_PAGE_OPTIONS[0]);
+  const [itemsPerPage, setItemsPerPage] = useState(ITEMS_PER_PAGE_OPTIONS[1]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedGenders, setSelectedGenders] = useState<string[]>([]);
@@ -74,6 +74,10 @@ export default function ItemList({
   const sortItems = useCallback(
     (items: Resource[]): Resource[] => {
       return [...items].sort((a, b) => {
+        // Пристроенные котики всегда в конце списка
+        if (a.isAdopted && !b.isAdopted) return 1;
+        if (!a.isAdopted && b.isAdopted) return -1;
+
         const aBookmarked = bookmarkedItems.includes(a.id);
         const bBookmarked = bookmarkedItems.includes(b.id);
         if (aBookmarked !== bBookmarked) return aBookmarked ? -1 : 1;

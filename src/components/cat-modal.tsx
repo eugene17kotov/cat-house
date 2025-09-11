@@ -25,6 +25,7 @@ interface CatModalProps {
     color: string;
     age: number;
     gender: 'male' | 'female';
+    isAdopted: boolean;
   } | null;
 }
 

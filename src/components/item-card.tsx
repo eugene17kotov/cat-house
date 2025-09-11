@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Card,
   CardContent,
@@ -30,6 +32,7 @@ interface ItemCardProps {
   onBookmark: (id: number) => void;
   layoutType: LayoutType;
   priority?: boolean;
+  isAdopted?: boolean;
 }
 
 // Standard animation settings to ensure consistency
@@ -53,6 +56,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
   onBookmark,
   layoutType = 'grid',
   priority = false,
+  isAdopted = false,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -124,13 +128,46 @@ const ItemCard: React.FC<ItemCardProps> = ({
           <div className='absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent dark:from-primary/10' />
         </div>
 
+        {/* Adopted overlay with liquid glass effect */}
+        {isAdopted && (
+          <div className='absolute inset-0 z-20 pointer-events-none'>
+            {/* Liquid glass backdrop */}
+            <div className='absolute inset-0 bg-white/20 dark:bg-black/30 backdrop-blur-[2px] backdrop-saturate-150' />
+
+            {/* Diagonal "Пристроен" text */}
+            <div className='absolute inset-0 flex items-center justify-center'>
+              <div
+                className={cn(
+                  'text-6xl font-bold text-blue-500/90 dark:text-blue-400/90 opacity-90 transform rotate-[45deg] select-none',
+                  layoutType === 'compact'
+                    ? 'md:text-5xl md:rotate-[55deg]'
+                    : 'md:text-6xl',
+                )}
+                style={{
+                  textShadow:
+                    '2px 2px 4px rgba(0,0,0,0.3), -1px -1px 2px rgba(255,255,255,0.3)',
+                  letterSpacing: '0.1em',
+                }}
+              >
+                ПРИСТРОЕН
+              </div>
+            </div>
+
+            {/* Subtle border highlight */}
+            <div className='absolute inset-0 border-2 border-green-500/30 dark:border-green-400/30 rounded-lg' />
+          </div>
+        )}
+
         {/* Primary Image */}
         <div className='relative h-72 md:h-48 overflow-hidden'>
           <CatImage
             src={primary_image}
             alt={title}
             fill
-            className='object-cover transition-transform duration-300 group-hover:scale-105'
+            className={cn(
+              'object-cover transition-transform duration-300 group-hover:scale-105',
+              isAdopted && 'filter saturate-75',
+            )}
             sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
             priority={priority}
           />
@@ -148,18 +185,29 @@ const ItemCard: React.FC<ItemCardProps> = ({
             {layoutType === 'compact' ? (
               // Compact layout - Title and info in separate rows
               <div className='space-y-2'>
-                <CardTitle className={styles.title}>{title}</CardTitle>
+                <CardTitle
+                  className={cn(styles.title, isAdopted && 'opacity-70')}
+                >
+                  {title}
+                </CardTitle>
                 <div className='flex items-center gap-3 text-xs'>
                   <Badge
                     variant='secondary'
                     className={cn(
                       'shrink-0 transition-all duration-300 w-fit',
                       styles.badge,
+                      isAdopted &&
+                        'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
                     )}
                   >
                     {color}
                   </Badge>
-                  <div className='flex items-center'>
+                  <div
+                    className={cn(
+                      'flex items-center',
+                      isAdopted && 'opacity-70',
+                    )}
+                  >
                     <Clock className='size-5 mr-1 opacity-70' />
                     <span>{getAgeText(age)}</span>
                   </div>
@@ -168,25 +216,39 @@ const ItemCard: React.FC<ItemCardProps> = ({
                     alt={gender === 'male' ? 'Самец' : 'Самка'}
                     width={20}
                     height={20}
-                    className='mr-1'
+                    className={cn(
+                      'mr-1 dark:invert',
+                      isAdopted && 'opacity-70',
+                    )}
                   />
                 </div>
               </div>
             ) : (
               // Grid layout - Title and info side by side
               <div className='flex justify-between items-start gap-2'>
-                <CardTitle className={styles.title}>{title}</CardTitle>
+                <CardTitle
+                  className={cn(styles.title, isAdopted && 'opacity-70')}
+                >
+                  {title}
+                </CardTitle>
                 <div className='flex flex-col items-end gap-2'>
                   <Badge
                     variant='secondary'
                     className={cn(
                       'shrink-0 transition-all duration-300',
                       styles.badge,
+                      isAdopted &&
+                        'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
                     )}
                   >
                     {color}
                   </Badge>
-                  <div className='flex items-center gap-3'>
+                  <div
+                    className={cn(
+                      'flex items-center gap-3',
+                      isAdopted && 'opacity-70',
+                    )}
+                  >
                     <div className='flex items-center'>
                       <Clock className='size-5 mr-1 opacity-70' />
                       <span className='text-sm'>{getAgeText(age)}</span>
@@ -211,7 +273,13 @@ const ItemCard: React.FC<ItemCardProps> = ({
               'transition-all duration-300',
             )}
           >
-            <p className={cn('text-muted-foreground', styles.description)}>
+            <p
+              className={cn(
+                'text-muted-foreground',
+                styles.description,
+                isAdopted && 'opacity-60',
+              )}
+            >
               {description}
             </p>
           </CardContent>
@@ -236,12 +304,14 @@ const ItemCard: React.FC<ItemCardProps> = ({
                   variant={isBookmarked ? 'default' : 'outline'}
                   size={layoutType === 'compact' ? 'sm' : 'icon'}
                   onClick={() => onBookmark(id)}
+                  disabled={isAdopted}
                   className={cn(
                     'transition-all duration-300 flex-shrink-0',
                     styles.bookmarkBtn,
                     isBookmarked
                       ? 'bg-yellow-500 hover:bg-yellow-600 text-white border-yellow-600'
                       : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:border-gray-400 dark:hover:border-gray-600',
+                    isAdopted && 'opacity-50 cursor-not-allowed',
                   )}
                 >
                   <Bookmark
@@ -260,6 +330,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
                 'w-full group overflow-hidden relative',
                 styles.button,
                 'transition-all duration-300',
+                isAdopted && 'opacity-70',
               )}
               variant='outline'
               size={layoutType === 'compact' ? 'sm' : 'default'}
@@ -290,6 +361,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
           color,
           age,
           gender,
+          isAdopted,
         }}
       />
     </motion.div>

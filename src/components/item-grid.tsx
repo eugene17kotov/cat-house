@@ -102,6 +102,7 @@ export function ItemGrid({
               onBookmark={onBookmark}
               layoutType={layoutType}
               priority={index === 0}
+              isAdopted={item.isAdopted}
             />
           ))}
         </motion.div>

@@ -7,6 +7,7 @@ export interface Resource {
   description: string;
   color: string;
   age: number;
+  isAdopted: boolean;
 }
 
 type CatBase = Omit<Resource, 'primary_image' | 'all_images'>;
@@ -25,6 +26,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Табби с белым',
     age: 4,
     imagesCount: 4,
+    isAdopted: false,
   },
   {
     id: 2,
@@ -35,6 +37,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Табби',
     age: 16,
     imagesCount: 3,
+    isAdopted: false,
   },
   {
     id: 3,
@@ -45,6 +48,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Черепаховый',
     age: 5,
     imagesCount: 2,
+    isAdopted: false,
   },
   {
     id: 4,
@@ -55,6 +59,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Белая с пятнами',
     age: 3,
     imagesCount: 1,
+    isAdopted: false,
   },
   {
     id: 5,
@@ -65,6 +70,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Черепаховый',
     age: 3,
     imagesCount: 3,
+    isAdopted: true,
   },
   {
     id: 6,
@@ -75,6 +81,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Табби',
     age: 2,
     imagesCount: 3,
+    isAdopted: false,
   },
   {
     id: 7,
@@ -85,6 +92,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Черный',
     age: 3,
     imagesCount: 3,
+    isAdopted: false,
   },
   {
     id: 8,
@@ -95,6 +103,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Табби с белым',
     age: 3,
     imagesCount: 2,
+    isAdopted: false,
   },
   {
     id: 9,
@@ -105,6 +114,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Табби с белым',
     age: 4,
     imagesCount: 2,
+    isAdopted: false,
   },
   {
     id: 10,
@@ -115,6 +125,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Черепаховый',
     age: 3,
     imagesCount: 1,
+    isAdopted: true,
   },
   {
     id: 11,
@@ -125,6 +136,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Черный с белым',
     age: 3,
     imagesCount: 1,
+    isAdopted: false,
   },
   {
     id: 12,
@@ -135,6 +147,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Черный',
     age: 4,
     imagesCount: 1,
+    isAdopted: false,
   },
   {
     id: 13,
@@ -145,6 +158,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Табби',
     age: 3,
     imagesCount: 1,
+    isAdopted: false,
   },
   {
     id: 14,
@@ -155,6 +169,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Табби с белым',
     age: 1,
     imagesCount: 1,
+    isAdopted: false,
   },
   {
     id: 15,
@@ -165,6 +180,7 @@ export const CATS_DATA: CatWithCount[] = [
     age: 4.5,
     color: 'Табби с белым',
     imagesCount: 1,
+    isAdopted: false,
   },
   {
     id: 16,
@@ -175,6 +191,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Табби',
     age: 2.5,
     imagesCount: 1,
+    isAdopted: false,
   },
   {
     id: 17,
@@ -185,6 +202,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Черный с белым',
     age: 3,
     imagesCount: 1,
+    isAdopted: false,
   },
   {
     id: 18,
@@ -195,6 +213,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Триколор',
     age: 3,
     imagesCount: 1,
+    isAdopted: false,
   },
   {
     id: 19,
@@ -205,6 +224,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Черный с белым',
     age: 3,
     imagesCount: 1,
+    isAdopted: false,
   },
   {
     id: 20,
@@ -215,6 +235,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Табби с белым',
     age: 3,
     imagesCount: 1,
+    isAdopted: false,
   },
   {
     id: 21,
@@ -225,6 +246,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Черный',
     age: 3,
     imagesCount: 1,
+    isAdopted: false,
   },
   {
     id: 22,
@@ -235,6 +257,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Серый с белым',
     age: 4,
     imagesCount: 1,
+    isAdopted: false,
   },
   {
     id: 23,
@@ -245,6 +268,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Табби',
     age: 3,
     imagesCount: 1,
+    isAdopted: false,
   },
   {
     id: 24,
@@ -255,6 +279,7 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Черный',
     age: 3,
     imagesCount: 1,
+    isAdopted: false,
   },
   {
     id: 25,
@@ -265,5 +290,6 @@ export const CATS_DATA: CatWithCount[] = [
     color: 'Табби',
     age: 2.5,
     imagesCount: 1,
+    isAdopted: false,
   },
 ];
