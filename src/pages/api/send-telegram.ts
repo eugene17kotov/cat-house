@@ -51,35 +51,7 @@ function rateLimit(ip: string, limit = 5, windowMs = 60_000) {
   return { ok: cur.count <= limit, remaining: Math.max(0, limit - cur.count) };
 }
 
-// POST з таймаутом і 1 ретраєм для 5xx
-async function postWithTimeoutRetry(
-  url: string,
-  body: any,
-  timeoutMs = 4000,
-): Promise<Response> {
-  const ac = new AbortController();
-  const t = setTimeout(() => ac.abort(), timeoutMs);
-  try {
-    const r = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-      signal: ac.signal,
-    });
-    if (!r.ok && r.status >= 500) {
-      // невелика пауза й один ретрай
-      await new Promise(r => setTimeout(r, 300));
-      return await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
-    }
-    return r;
-  } finally {
-    clearTimeout(t);
-  }
-}
+// Убираем сложную функцию с таймаутами - используем простой fetch
 
 // Опційна перевірка Cloudflare Turnstile
 async function verifyTurnstile(token: string, remoteIp: string | undefined) {
@@ -141,6 +113,8 @@ export default async function handler(
   try {
     const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
+
+    // Убираем лишнее логирование для продакшена
 
     if (!telegramToken || !chatId) {
       console.error('Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID'); // не логимо самі значення
@@ -219,7 +193,7 @@ export default async function handler(
       timeStyle: 'medium',
     }).format(new Date());
 
-    // Формуємо повідомлення
+    // Формуємо повідомлення з MarkdownV2
     const telegramMessage =
       `*🐱 Новое сообщение с сайта Заводские кошки*\n\n` +
       `*👤 Name:* ${nameSafe}\n` +
@@ -237,7 +211,12 @@ export default async function handler(
       disable_web_page_preview: true,
     };
 
-    const telegramResponse = await postWithTimeoutRetry(tgUrl, body, 4000);
+    // Отправляем сообщение в Telegram
+    const telegramResponse = await fetch(tgUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
 
     if (!telegramResponse.ok) {
       // зчитаємо текст помилки, але не віддаємо сирі дані клієнту
