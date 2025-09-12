@@ -39,7 +39,7 @@ function escapeMdV2(s: string) {
 // Примітивний in-memory rate-limit (на інстанс)
 // Для продакшну краще Redis/Upstash
 const bucket = new Map<string, { count: number; reset: number }>();
-function rateLimit(ip: string, limit = 5, windowMs = 60_000) {
+function rateLimit(ip: string, limit = 2, windowMs = 60_000) {
   const now = Date.now();
   const cur = bucket.get(ip) ?? { count: 0, reset: now + windowMs };
   if (now > cur.reset) {
@@ -129,11 +129,12 @@ export default async function handler(
     }
 
     // Rate-limit
+    const RATE_LIMIT = process.env.RATE_LIMIT || 2;
     const ip =
       (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() ||
       req.socket.remoteAddress ||
       '0.0.0.0';
-    const rl = rateLimit(ip, 5, 60_000); // 5 запитів/хв для однієї IP
+    const rl = rateLimit(ip, Number(RATE_LIMIT), 60_000); // 2 запитів/хв для однієї IP
     if (!rl.ok) {
       return json(res, 429, { error: 'Too many requests' });
     }
