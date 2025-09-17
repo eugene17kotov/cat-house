@@ -63,7 +63,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
   // Функция для правильного склонения слова "год"
   const getAgeText = (age: number): string => {
     if (age === 1) return '1 год';
-    if (age >= 2 && age <= 4) return `${age} года`;
+    if (age >= 2 && age < 5) return `${age} года`;
     return `${age} лет`;
   };
 
